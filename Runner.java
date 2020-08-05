@@ -86,7 +86,7 @@ public class Runner
         generate_list(men_list, women_list);
         generate_list(women_list, men_list);
         System.out.println("quick info");
-        for(Person woman : women_list)
+        for(Person woman : men_list)
         {
             System.out.println(woman + " loves " + woman.preferred);
         }
@@ -98,6 +98,32 @@ public class Runner
 
         System.out.println();
         System.out.println("Final result: ");
+
+
+        Person alone_man = null;
+
+        for(Person man : men_list)
+        {
+            if(!man.is_engaged)
+            {
+                alone_man = man;
+            }
+        }
+
+        for(Person man : women_list)
+        {
+            if(!man.is_engaged)
+            {
+                if(alone_man != null)
+                {
+                    alone_man.lover = man;
+                    man.lover = alone_man;
+                    alone_man.is_engaged = true;
+                    man.is_engaged = true;
+                }
+            }
+        }
+
         for(Person man : men_list)
         {
             System.out.println(man + " + " + man.lover);
